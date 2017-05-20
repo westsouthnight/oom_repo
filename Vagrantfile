@@ -17,6 +17,7 @@ Vagrant.configure(2) do |config|
  config.vm.network "private_network", type: "dhcp"
   config.vm.define "ansible-control", primary: true do |control|
     control.vm.box = "ubuntu/xenial64"
+    config.ssh.private_key_path = File.expand_path('~/.vagrant.d/insecure_private_key')
     # Define targets
     control.vm.provision "shell", binary: true, privileged: false, path: "scripts/install-ansible.sh"
     control.vm.provision "ansible" do |ansible|
