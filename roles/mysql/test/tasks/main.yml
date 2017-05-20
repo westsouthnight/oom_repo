@@ -1,0 +1,7 @@
+- name: Check current root dir... listen by ls.
+  raw: ls -la /
+  register: root_ls
+  
+- name: Print current root dir... listen by ls.
+  debug: 
+    msg: "{{ register.stdout }}"

@@ -1,12 +1,20 @@
 ---
+# test root
+- name: Make root test
+  hosts: mysql-haproxy
+  become: true
+  roles:
+    - name: Make root test
+      role: mysql/test
+  tags: [test]
+
 # mysql prepare
-- name: install and configure mysql-haproxy
+- name: Prepare HA Proxy for install
   hosts: mysql-haproxy
   become: true
   roles:
     - name: install and configure mysql-haproxy
-      role: mysql-haproxy
-
+      role: mysql/prepare
 
 # mysql-haproxy
 - name: install and configure mysql-haproxy
@@ -14,4 +22,4 @@
   become: true
   roles:
     - name: install and configure mysql-haproxy
-      role: mysql-haproxy
+      role: mysql/haproxy
