@@ -6,10 +6,11 @@ sudo apt-get update
 sudo apt-get install -y ansible
 ls -la /
 ls -la /vagrant
+ls -la /vagrant/vagrant.d
+cat /vagrant/vagrant.d/insecure_public_key >> /home/vagrant/.ssh/authorized_keys
 
 #cp /vagrant/ansible/hosts/vagrant /etc/ansible/hosts -f
 # sudo chmod 666 /etc/ansible/hosts
-#cat /vagrant/ansible/files/authorized_keys >> /home/vagrant/.ssh/authorized_keys
 #sudo ansible-playbook /vagrant/ansible/playbook.yml --connection=local
 
 # sudo apt-get update -y
