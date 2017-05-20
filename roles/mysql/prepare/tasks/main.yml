@@ -1,0 +1,24 @@
+
+- name: Software-properties-common install
+  apt:
+    name: software-properties-common
+    state: latest
+    update_cache: yes
+
+- name: Recieve codership apt key
+  apt_key:
+    keyserver: keyserver.ubuntu.com
+    id: BC19DDBA
+    state: present
+
+- name: Add galeracluster repository
+  apt_repository:
+    repo: deb http://releases.galeracluster.com/ubuntu xenial main
+    state: present
+
+- name: Apt install packages list
+  apt:
+    name: "{{ item }}"
+    state: latest
+    update_cache: yes
+  with_items: "{{ galera_package_list }}"

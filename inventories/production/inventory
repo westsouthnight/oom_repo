@@ -1,0 +1,5 @@
+[mysql-haproxy:children]
+mysql-backend
+
+[mysql-backend]
+''[01:03]-mysql

@@ -1,0 +1,21 @@
+###
+
+mysql_settings:
+   repository:
+      mysql: "http://releases.galeracluster.com/binary/mysql-wsrep-5.7.17-25.11-linux-x86_64.tar.gz"
+      galera: 
+   persistent_mysql_database_state: "{{ ansible_environment_mysql_settings_storage_state }}"
+   directories:
+       path: "/mnt/glusterfs/opt/mysql_settings/{{ ansible_environment }}"
+       data_dir: "/mnt/glusterfs/opt/mysql_settings/{{ ansible_environment }}/data"
+       config_path: "/mnt/glusterfs/opt/mysql_settings/{{ ansible_environment }}/config"
+       sql_files: "/mnt/glusterfs/opt/mysql_settings/{{ ansible_environment }}/sql_files"
+   overlay_ip: "{{ mysql_overlay_ip }}"
+   user: "{{ ansible_environment_mysql_settings_storage_user }}"
+   password: "{{ ansible_environment_mysql_settings_storage_password }}"
+   database: "{{ ansible_environment }}"
+   
+galera_package_list:
+    - "galera-3"
+    - "galera-arbitrator-3"
+    - "mysql-wsrep-5.6"

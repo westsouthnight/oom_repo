@@ -1,0 +1,6 @@
+---
+# vars file for roles/ssh_access
+sshusers:
+  test:
+    shell: /usr/bin/bash
+    key: "{{ lookup('file', 'test.pub') }}"

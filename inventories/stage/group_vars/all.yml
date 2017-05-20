@@ -1,0 +1,9 @@
+###
+
+ansible_environment: "stage"
+
+ansible_environment_mysql_settings_storage_user: "root"
+ansible_environment_mysql_settings_storage_password: "123456789qQ"
+ansible_environment_mysql_settings_storage_state: "yes"
+
+mysql_overlay_ip: "127.0.0.1"

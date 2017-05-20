@@ -1,0 +1,14 @@
+[mysql-haproxy:children]
+mysql-backend
+
+[mysql-backend]
+''[01:03]-target-host
+
+[galera-nodes]
+''[01:03]-target-host
+
+[all-nodes]
+''[01:03]-target-host
+
+[vagrant]
+''[01:03]-target-host

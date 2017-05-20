@@ -1,0 +1,19 @@
+---
+# defaults file for roles/ufw
+
+# ufw_port_for_all: [22, 80, 443]
+ufw_port_for_all: []
+
+# ufw_rules:
+#   - port: 22
+#     sources:
+#       - localhost
+#       - example.dev
+#   - port: 443
+#     sources: []
+ufw_port_for_networks: []
+
+# ufw_rules:
+#   - port: 22
+#     hosts: "{{ some_group }}"
+ufw_port_for_inventory_hostnames: []

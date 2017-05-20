@@ -1,0 +1,17 @@
+---
+# mysql prepare
+- name: install and configure mysql-haproxy
+  hosts: mysql-haproxy
+  become: true
+  roles:
+    - name: install and configure mysql-haproxy
+      role: mysql-haproxy
+
+
+# mysql-haproxy
+- name: install and configure mysql-haproxy
+  hosts: mysql-haproxy
+  become: true
+  roles:
+    - name: install and configure mysql-haproxy
+      role: mysql-haproxy

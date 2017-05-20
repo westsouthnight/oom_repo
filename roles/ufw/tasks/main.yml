@@ -1,0 +1,62 @@
+---
+# tasks file for roles/ufw
+- name: install ufw
+  apt:
+    name: ufw
+    state: latest
+  tags:
+    - ufw
+
+- name: set firewall default policy
+  ufw:
+    direction: incoming
+    policy: deny
+    state: enabled
+  tags:
+    - ufw
+
+- name: insert rules for all networks
+  ufw:
+    rule: allow
+    to_port: "{{ item }}"
+    from_ip: any
+  with_items:
+    - "{{ ufw_port_for_all }}"
+  tags:
+    - ufw
+
+- name: insert rules for selected networks
+  ufw:
+    rule: allow
+    port: "{{ item.0.port }}"
+    from_ip: "{{ item.1 }}"
+  with_subelements:
+    - "{{ ufw_port_for_networks }}"
+    - sources
+  tags:
+    - ufw
+
+- name: insert rules for hosts from inventory for Linux clients
+  ufw:
+    rule: allow
+    port: "{{ item.0.port }}"
+    from_ip: "{{ hostvars[item.1].ansible_default_ipv4.address }}"
+  with_subelements:
+    - "{{ ufw_port_for_inventory_hostnames }}"
+    - hosts
+  when: "{{ hostvars[item.1].ansible_system == 'Linux' }}"
+  tags:
+    - ufw
+
+- name: insert rules for hosts from inventory for Windows clients
+  ufw:
+    rule: allow
+    port: "{{ item.0.port }}"
+    from_ip: "{{ lookup('dig', hostvars[item.1].ansible_fqdn) }}"
+  with_subelements:
+    - "{{ ufw_port_for_inventory_hostnames }}"
+    - hosts
+  when: "{{ hostvars[item.1].ansible_system == 'Win32NT' }}"
+  tags:
+    - ufw
+
