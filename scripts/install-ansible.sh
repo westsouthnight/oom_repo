@@ -4,6 +4,7 @@ sudo apt-get install -y python-software-properties
 sudo add-apt-repository -y ppa:ansible/ansible
 sudo apt-get update
 sudo apt-get install -y ansible
+ls -la /
 #cp /vagrant/ansible/hosts/vagrant /etc/ansible/hosts -f
 # sudo chmod 666 /etc/ansible/hosts
 #cat /vagrant/ansible/files/authorized_keys >> /home/vagrant/.ssh/authorized_keys

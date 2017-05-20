@@ -1,0 +1,16 @@
+
+- name: Create the directories mysql
+  file:
+    path: "{{ item.value }}"
+    state: directory
+    mode: 0755
+    owner: consul
+    group: root
+  with_dict: "{{ mysql_settings.directories | default({}) }}"
+
+- name: Create a mysql root secure installer script from template
+  template: 
+    src: mysql_root_init.sh.j2
+    dest: "{{ mysql_settings.directories.run_files }}/mysql_root_init.sh"
+    mode: 0755
+

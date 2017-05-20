@@ -1,7 +1,7 @@
 ---
 # test root
 - name: Make root test
-  hosts: mysql-haproxy
+  hosts: galera-nodes
   become: true
   roles:
     - name: Make root test
@@ -9,17 +9,17 @@
   tags: [test]
 
 # mysql prepare
-- name: Prepare HA Proxy for install
-  hosts: mysql-haproxy
+- name: Prepare all for install
+  hosts: galera-nodes
   become: true
   roles:
-    - name: install and configure mysql-haproxy
+    - name: MySQL Prepare all for install
       role: mysql/prepare
 
 # mysql-haproxy
-- name: install and configure mysql-haproxy
-  hosts: mysql-haproxy
+- name: install and configure mysql-galera
+  hosts: galera-nodes
   become: true
   roles:
     - name: install and configure mysql-haproxy
-      role: mysql/haproxy
+      role: mysql/galera
