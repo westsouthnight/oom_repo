@@ -35,7 +35,6 @@ Vagrant.configure(2) do |config|
         "mesos-masters": ["01-target-host", "02-target-host", "03-target-host"],
         "mesos-slaves": ["01-target-host", "02-target-host", "03-target-host"],
         "mesos-all": ["01-target-host", "02-target-host", "03-target-host", "04-target-host","05-target-host", "06-target-host"],
-        mesos-all
         # include all host into this group
         "vagrant": [
           "01-target-host",
