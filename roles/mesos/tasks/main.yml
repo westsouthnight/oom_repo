@@ -12,6 +12,13 @@
 - name: Debug distro
   debug: msg="{{ distro.stdout }}"
 
+- name: Get CODENAME of distro
+  raw: lsb_release -cs
+  register: codename
+
+- name: Debug codename
+  debug: msg="{{ codename.stdout }}"
+
 # - name: Add galeracluster repository
 #   apt_repository:
 #     repo: deb http://releases.galeracluster.com/ubuntu xenial main

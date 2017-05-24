@@ -1,5 +1,12 @@
 
 - name: Install keepalived
   apt:
-  
-/etc/keepalived/
+    name: keepalived
+    state: latest
+  tags:
+    - keepalived
+    
+- name: Create keepalived.conf from template
+  template:
+    src: keepalived.conf.j2
+    dest: "{{ keepalived_settings.directories.conf }}"

@@ -6,3 +6,9 @@
     state: present
     reload: yes
 
+- name: install haproxy
+  apt:
+    name: haproxy
+    state: latest
+  tags:
+    - haproxy

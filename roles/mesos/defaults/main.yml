@@ -1,0 +1,4 @@
+mesos_settigns_defaults:
+   packages:
+      - mesosphere
+      - mesos
