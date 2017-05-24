@@ -1,4 +1,8 @@
 
+- name: Inject defaults
+  set_fact:
+    mesos_settigns: "{{ mesos_settigns_defaults | combine(mesos_settigns) }}"
+
 - name: Recieve Mesos apt key
   apt_key:
     keyserver: keyserver.ubuntu.com
@@ -29,3 +33,20 @@
 # DISTRO=$(lsb_release -is | tr '[:upper:]' '[:lower:]')
 # CODENAME=$(lsb_release -cs)
 # echo "deb http://repos.mesosphere.io/${DISTRO} ${CODENAME} main" | sudo tee /etc/apt/sources.list.d/mesosphere.list
+
+- name: Install Mesos packages
+  apt:
+    name: "{{ item }}"
+    update_cache: yes
+  with_list: "{{ mesos_settigns_defaults.packages }}"
+
+# - lineinfile:
+#     path: /etc/selinux/config
+#     regexp: '^SELINUX='
+#     line: 'SELINUX=enforcing'
+    
+ 
+- name: Generating quorum.status count
+  template:
+    src: quorum.status
+    dest: /etc/mesos-master/quorum.status

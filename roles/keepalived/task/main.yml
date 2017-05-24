@@ -10,3 +10,4 @@
   template:
     src: keepalived.conf.j2
     dest: "{{ keepalived_settings.directories.conf }}"
+

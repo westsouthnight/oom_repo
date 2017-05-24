@@ -1,0 +1,1 @@
+{% set count_of_masters = [] %}{% for server in groups['mesos-masters']  %}{% if count_of_masters.append(server) %}{% endif %}{% endfor %}{{ count_of_masters / 50 | round }}

@@ -14,3 +14,8 @@
     dest: "{{ mysql_settings.directories.run_files }}/mysql_root_init.sh"
     mode: 0755
 
+- name: Install mysql packages
+  apt:
+    name: "{{ item }}"
+    update_cache: yes
+  with_list: "{{ mysql_settigns.packages }}"

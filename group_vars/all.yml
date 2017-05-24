@@ -19,3 +19,8 @@ galera_package_list:
     - "galera-3"
     - "galera-arbitrator-3"
     - "mysql-wsrep-5.6"
+    
+mesos_settigns_defaults:
+   packages:
+      - mesosphere
+      - mesos
