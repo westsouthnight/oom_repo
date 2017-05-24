@@ -7,10 +7,11 @@ sudo apt-get install -y ansible
 ls -la /
 ls -la /vagrant
 ls -la /vagrant/vagrant.d
-whoami
-sudo mkdir -p /home/vagrant/.ssh/
-sudo chown -R ubuntu:ubuntu /home/vagrant/.ssh/
-sudo cat /vagrant/vagrant.d/insecure_public_key >> /home/vagrant/.ssh/authorized_keys
+#whoami
+#sudo rm -rf /home/vagrant/.ssh/authorized_keys
+#sudo mkdir -p /home/vagrant/.ssh/
+#sudo chown -R ubuntu:ubuntu /home/vagrant/.ssh/
+#sudo cat /vagrant/vagrant.d/insecure_public_key >> /home/vagrant/.ssh/authorized_keys
 
 #cp /vagrant/ansible/hosts/vagrant /etc/ansible/hosts -f
 # sudo chmod 666 /etc/ansible/hosts
