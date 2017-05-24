@@ -1,0 +1,32 @@
+- name: Recieve Mesos apt key
+  apt_key:
+    keyserver: keyserver.ubuntu.com
+    id: E56151BF
+    state: present
+
+- name: Get distro
+  raw: lsb_release -is | tr '[:upper:]' '[:lower:]'
+  register: distro
+  
+- name: Debug distro
+  debug: msg="{{ distro.stdout }}"
+
+- name: Get CODENAME of distro
+  raw: lsb_release -cs
+  register: codename
+
+- name: Debug codename
+  debug: msg="{{ codename.stdout }}"
+
+- name: Add mesos repository
+  apt_repository:
+    repo: deb http://repos.mesosphere.io/{{ distro.stdout }} {{ codename.stdout }} main
+    state: present
+
+- name: Install Mesos packages
+  apt:
+    name: "{{ item }}"
+    update_cache: yes
+  with_list: "{{ mesos_settigns.packages }}"
+  
+  

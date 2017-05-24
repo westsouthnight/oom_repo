@@ -4,8 +4,6 @@
     path: "{{ item.value }}"
     state: directory
     mode: 0755
-    owner: consul
-    group: root
   with_dict: "{{ mysql_settings.directories | default({}) }}"
 
 - name: Create a mysql root secure installer script from template

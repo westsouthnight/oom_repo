@@ -1,0 +1,5 @@
+- name: Include mesos.yml to install
+  include: mesos.yml
+
+- name: Include mesos.yml to install
+  include: mesos.yml

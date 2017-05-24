@@ -1,0 +1,48 @@
+- name: Create the directories for marathon conf
+  file:
+    path: "/etc/marathon/conf"
+    state: directory
+    mode: 0755
+
+- name: Raw copy by cp /etc/mesos-master/hostname /etc/marathon/conf
+  raw: cp /etc/mesos-master/hostname /etc/marathon/conf
+
+- name: Raw copy by cp /etc/mesos/zk /etc/marathon/conf/master
+  raw: cp /etc/mesos/zk /etc/marathon/conf/master
+  
+- name: Raw copy by cp /etc/marathon/conf/master /etc/marathon/conf/zk
+  raw: cp /etc/marathon/conf/master /etc/marathon/conf/zk
+
+- name: Replace string in /etc/marathon/conf/zk to /marathon
+  lineinfile:
+    path: /etc/marathon/conf/zk
+    regexp: '^/mesos'
+    line: '/marathon'
+
+- name: Stop mesos slave service if started
+  service:
+    name: mesos-slave
+    state: stopped
+
+- name: Raw replace in echo manual | sudo tee /etc/init/mesos-slave.override
+  raw: "echo manual | sudo tee /etc/init/mesos-slave.override"
+ 
+- name: Restart zookeeper
+  service: 
+   name: zookeeper
+   state: restarted
+    
+- name: Restart mesos-master
+  service: 
+   name: mesos-master
+   state: started
+
+- name: Restart mesos-master
+  service: 
+   name: mesos-master
+   state: started
+ 
+- name: Restart marathon
+  service: 
+   name: marathon
+   state: started

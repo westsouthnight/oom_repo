@@ -1,0 +1,29 @@
+- name: Create the directories for marathon conf
+  file:
+    path: "/etc/marathon/conf"
+    state: directory
+    mode: 0755
+    
+- name: Stop zookeeper
+  service:
+    name: zookeeper
+    state: stopped
+
+- name: Raw echo manual | sudo tee /etc/init/zookeeper.override
+  raw: "echo manual | sudo tee /etc/init/zookeeper.override"
+
+- name: Raw echo manual | sudo tee /etc/init/mesos-master.override
+  raw: "echo manual | sudo tee /etc/init/mesos-master.override"
+
+- name: Stop mesos-master
+  service:
+    name: mesos-master
+    state: stopped
+
+- name: Raw cp /etc/mesos-slave/ip /etc/mesos-slave/hostname
+  raw: "cp /etc/mesos-slave/ip /etc/mesos-slave/hostname"
+
+- name: Stop mesos-slave
+  service:
+    name: mesos-slave
+    state: started

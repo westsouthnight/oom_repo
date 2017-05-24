@@ -12,15 +12,33 @@
   become: true
   hosts: mesos-all
   roles:
-    - name: Open access to Galera cluster
+    - name: Open access to Mesos cluster
       role: ufw
       ufw_port_for_inventory_hostnames:
-        - port: 3306
+        - port: 2181
           hosts: "{{ groups['mesos-all'] }}"
-        - port: 4567
+        - port: 2888
           hosts: "{{ groups['mesos-all'] }}"
-        - port: 4568
+        - port: 5050
           hosts: "{{ groups['mesos-all'] }}"
-        - port: 4444
+        - port: 5051
+          hosts: "{{ groups['mesos-all'] }}"
+        - port: 8080
           hosts: "{{ groups['mesos-all'] }}"
   tags: [ufw]
+
+# mesos prepare
+- name: Prepare all for install mesos
+  hosts: mesos-all
+  become: true
+  roles:
+    - name: Installing packages to mesos cluster
+      role: mesos/prepare_install
+    - name: Configuring zookeeper
+      role: mesos/zookeeper
+    - name: Configuring mesos stage 1
+      role: mesos/mesos
+      
+prepare_install
+
+mesos

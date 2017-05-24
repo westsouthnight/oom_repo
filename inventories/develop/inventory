@@ -14,10 +14,11 @@ mysql-backend
 ''[01:03]-target-host
 
 [mesos-masters]
-''[01:03]-target-host
+''[01:03]-target-host mesos_role="master"
+
 
 [mesos-slaves]
-''[04:06]-target-host
+''[04:06]-target-host mesos_role="slave"
 
 [mesos-all:children]
 mesos-slaves

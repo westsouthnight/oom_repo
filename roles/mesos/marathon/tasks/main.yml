@@ -1,1 +1,8 @@
---
+ 
+- name: Include init Mesos Masters
+  include: master.yml
+  when: mesos_role == "master"
+
+- name: Include init Mesos Slaves
+  include: slace.yml
+  when: mesos_role == "slave"

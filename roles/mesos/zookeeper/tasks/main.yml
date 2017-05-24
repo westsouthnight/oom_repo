@@ -1,0 +1,14 @@
+- name: Generationg /etc/mesos/zk
+  template:
+    src: zk.j2
+    dest: /etc/mesos/zk
+
+- name: Generating myid.j2 for node
+  template:
+    src: myid.j2
+    dest: /etc/zookeeper/conf/myid
+    
+- name: Generating zoo.cfg for node
+  template:
+    src: zoo.cfg
+    dest: /etc/zookeeper/conf/zoo.cfg
