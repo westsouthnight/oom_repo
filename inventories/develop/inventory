@@ -12,3 +12,9 @@ mysql-backend
 
 [vagrant]
 ''[01:03]-target-host
+
+[mesos-masters]
+''[01:03]-target-host
+
+[mesos-slaves]
+''[04:06]-target-host

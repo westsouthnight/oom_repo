@@ -11,12 +11,12 @@ function format_run() {
     image=$(       echo $json | jq -r .[0].Image                                       )
     cmd=$(         echo $json | jq -r '.[0].Config.Cmd | join(" ")'                    )
     
-    mapped_to_container_temp=`(echo $json| jq '.[0].NetworkSettings .Ports' | jq '.[]'   )`
+    mapped_to_container_temp=$( .  echo $json | jq '.[0].NetworkSettings .Ports' | jq '.[]'   )
     
     if [[ "$mapped_to_container_temp" != null ]];
     then
-        mapped_to_container=`(echo $json| jq '.[0].NetworkSettings .Ports' | jq '.[]' | jq '.[]' | jq '.HostPort' | tr -d '"' | cut -f 1- -d\/ --output-delimiter=$'\n' )`
-        mapped_to_host=$(echo $json | jq -r '.[0].NetworkSettings.Ports | keys | to_entries |  map(.value) | join(" ")')
+        mapped_to_container=$( .  echo $json | jq '.[0].NetworkSettings .Ports' | jq '.[]' | jq '.[]' | jq '.HostPort' | tr -d '"' | cut -f 1- -d\/ --output-delimiter=$'\n' )
+        mapped_to_host=$( .  echo $json | jq -r '.[0].NetworkSettings.Ports | keys | to_entries |  map(.value) | join(" ")')
         array=(${mapped_to_container// / })
         array2=(${mapped_to_host// / })
 

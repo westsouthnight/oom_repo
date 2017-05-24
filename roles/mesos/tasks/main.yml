@@ -1,0 +1,24 @@
+
+- name: Recieve Mesos apt key
+  apt_key:
+    keyserver: keyserver.ubuntu.com
+    id: E56151BF
+    state: present
+
+- name: Get distro
+  raw: lsb_release -is | tr '[:upper:]' '[:lower:]'
+  register: distro
+  
+- name: Debug distro
+  debug: msg="{{ distro.stdout }}"
+
+# - name: Add galeracluster repository
+#   apt_repository:
+#     repo: deb http://releases.galeracluster.com/ubuntu xenial main
+#     state: present
+
+
+# sudo apt-key adv --keyserver keyserver.ubuntu.com --recv E56151BF
+# DISTRO=$(lsb_release -is | tr '[:upper:]' '[:lower:]')
+# CODENAME=$(lsb_release -cs)
+# echo "deb http://repos.mesosphere.io/${DISTRO} ${CODENAME} main" | sudo tee /etc/apt/sources.list.d/mesosphere.list

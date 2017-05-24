@@ -3,7 +3,7 @@
 
 Vagrant.configure(2) do |config|
   
-  (1..4).each do |i|
+  (1..6).each do |i|
       config.vm.define "0#{i}-target-host", primary: true do |config|
         config.vm.box = "ubuntu/xenial64"
         config.vm.synced_folder ".", "/vagrant"
@@ -13,8 +13,8 @@ Vagrant.configure(2) do |config|
     end
       
   config.vm.provider :virtualbox do |v|
-    v.memory = 3048
-    v.cpus = 3
+    v.memory = 512
+    v.cpus = 1
   end
  config.vm.network "private_network", type: "dhcp"
   config.vm.define "ansible-control", primary: true do |control|

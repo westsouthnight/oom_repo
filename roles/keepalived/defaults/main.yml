@@ -1,0 +1,3 @@
+keepalived_settings_defaults:
+    directories:
+       path: "/etc/keepalived"
