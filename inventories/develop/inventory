@@ -18,3 +18,7 @@ mysql-backend
 
 [mesos-slaves]
 ''[04:06]-target-host
+
+[mesos-all:children]
+mesos-slaves
+mesos-masters

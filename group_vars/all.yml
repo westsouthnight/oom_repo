@@ -29,7 +29,7 @@ galera_settings:
         - "mysql-wsrep-5.6"
         - "rsync"
 
-mesos_settigns_defaults:
+mesos_settigns:
    packages:
       - mesosphere
       - mesos

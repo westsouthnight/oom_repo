@@ -8,36 +8,19 @@
       role: mesos/test
   tags: [test]
 
-- name: 1. Open Firewall For Galera
+- name: 1. Open Firewall For Mesos
   become: true
-  hosts: galera-nodes
+  hosts: mesos-all
   roles:
     - name: Open access to Galera cluster
       role: ufw
       ufw_port_for_inventory_hostnames:
         - port: 3306
-          hosts: "{{ groups['galera-nodes'] }}"
+          hosts: "{{ groups['mesos-all'] }}"
         - port: 4567
-          hosts: "{{ groups['galera-nodes'] }}"
+          hosts: "{{ groups['mesos-all'] }}"
         - port: 4568
-          hosts: "{{ groups['galera-nodes'] }}"
+          hosts: "{{ groups['mesos-all'] }}"
         - port: 4444
-          hosts: "{{ groups['galera-nodes'] }}"
+          hosts: "{{ groups['mesos-all'] }}"
   tags: [ufw]
-
-# mysql prepare
-- name: Prepare all for install
-  hosts: galera-nodes
-  become: true
-  roles:
-    - name: MySQL Prepare all for install
-      role: mysql/prepare
-
-# mysql-haproxy
-- name: install and configure mysql-galera
-  hosts: galera-nodes
-  become: true
-  roles:
-    - name: install and configure mysql-haproxy
-      role: mysql/galera
-      

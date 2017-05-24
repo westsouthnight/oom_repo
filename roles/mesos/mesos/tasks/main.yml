@@ -23,22 +23,16 @@
 - name: Debug codename
   debug: msg="{{ codename.stdout }}"
 
-# - name: Add galeracluster repository
-#   apt_repository:
-#     repo: deb http://releases.galeracluster.com/ubuntu xenial main
-#     state: present
-
-
-# sudo apt-key adv --keyserver keyserver.ubuntu.com --recv E56151BF
-# DISTRO=$(lsb_release -is | tr '[:upper:]' '[:lower:]')
-# CODENAME=$(lsb_release -cs)
-# echo "deb http://repos.mesosphere.io/${DISTRO} ${CODENAME} main" | sudo tee /etc/apt/sources.list.d/mesosphere.list
+- name: Add mesos repository
+  apt_repository:
+    repo: deb http://repos.mesosphere.io/{{ distro.stdout }} {{ codename.stdout }} main
+    state: present
 
 - name: Install Mesos packages
   apt:
     name: "{{ item }}"
     update_cache: yes
-  with_list: "{{ mesos_settigns_defaults.packages }}"
+  with_list: "{{ mesos_settigns.packages }}"
 
 # - lineinfile:
 #     path: /etc/selinux/config
