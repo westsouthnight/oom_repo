@@ -3,9 +3,10 @@
 mysql_settings:
    repository:
       mysql: "http://releases.galeracluster.com/binary/mysql-wsrep-5.7.17-25.11-linux-x86_64.tar.gz"
-      galera: 
+      galera: https://launchpad.net/galera/3.x/25.3.9/+download/Download%20at%20www.galeracluster.com
    persistent_mysql_database_state: "{{ ansible_environment_mysql_settings_storage_state }}"
    directories:
+       etc_conf_d: "/etc/mysql/conf.d/"
        path: "/opt/mysql/{{ ansible_environment }}"
        data_dir: "/opt/mysql/{{ ansible_environment }}/data"
        config_path: "/opt/mysql/{{ ansible_environment }}/config"
@@ -14,12 +15,20 @@ mysql_settings:
    user: "{{ ansible_environment_mysql_settings_storage_user }}"
    password: "{{ ansible_environment_mysql_settings_storage_password }}"
    database: "{{ ansible_environment }}"
-   
-galera_package_list:
-    - "galera-3"
-    - "galera-arbitrator-3"
-    - "mysql-wsrep-5.6"
-    
+
+
+galera_settings:
+    network_ports:
+       - 3306 
+       - 4567
+       - 4568
+       - 4444 
+    package_list:
+        - "galera-3"
+        - "galera-arbitrator-3"
+        - "mysql-wsrep-5.6"
+        - "rsync"
+
 mesos_settigns_defaults:
    packages:
       - mesosphere

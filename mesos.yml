@@ -1,11 +1,11 @@
 ---
 # test root
 - name: Make root test
-  hosts: galera-nodes
+  hosts: mesos-masters
   become: true
   roles:
     - name: Make root test
-      role: mysql/test
+      role: mesos/test
   tags: [test]
 
 - name: 1. Open Firewall For Galera
