@@ -37,6 +37,8 @@ Vagrant.configure(2) do |config|
           "02-target-host",
           "03-target-host",
           "04-target-host",
+          "05-target-host",
+          "06-target-host",
           "ansible-control"
         ]
       }
