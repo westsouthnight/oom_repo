@@ -1,0 +1,7 @@
+nxt_settings_defaults:
+  zip_link: "https://bitbucket.org/JeanLucPicard/nxt/downloads/nxt-client-1.11.5.zip"
+  directories:
+     main: "/nxt"
+     app: "/nxt/app"
+     config: "/nxt/config"
+     archive: "/nxt/archive"

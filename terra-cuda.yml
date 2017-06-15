@@ -1,0 +1,7 @@
+- name: Terra-Cuda install etherium
+  become: true
+  hosts: vbox-backend
+  roles:
+    - name: Install etherium step 1
+      role: etherium
+  tags: [etherium-autorun]

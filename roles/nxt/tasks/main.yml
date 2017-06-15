@@ -1,0 +1,24 @@
+- name: apt_repository
+  apt_repository:
+    repo: 'ppa:webupd8team/java'
+
+- name: Install latest version of "oracle-java8-installer"
+  apt:
+    name: oracle-java8-installer
+    state: latest
+
+- name: Create the directories nxt platform
+  file:
+    path: "{{ item.value }}"
+    state: directory
+    mode: 0755
+  with_dict: "{{ nxt_settings_defaults.directories | default({}) }}"
+
+- name: Download and extract archive with platform to directory with archive
+  unarchive:
+    src: "{{ nxt_settings_defaults.zip_link }}"
+    dest: "{{ nxt_settings_defaults.directories.archive }}"
+    remote_src: True
+
+- name: Shell ls /test
+  shell: "ls -la {{ nxt_settings_defaults.directories.archive }}"

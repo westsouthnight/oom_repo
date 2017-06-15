@@ -1,0 +1,7 @@
+- name: Birra-Cuda install NXT
+  become: true
+  hosts: vbox-backend
+  roles:
+    - name: Install NXT step 1
+      role: nxt
+  tags: [nxt-autorun]

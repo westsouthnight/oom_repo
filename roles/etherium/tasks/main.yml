@@ -1,0 +1,48 @@
+- name: Create the directories nxt platform
+  file:
+    path: "{{ item.value }}"
+    state: directory
+    mode: 0755
+  with_dict: "{{ etherium_settings_defaults.directories | default({}) }}"
+
+- name: Download and extract archive with platform to directory with archive
+  get_url:
+    url: "{{ etherium_settings_defaults.zip_link }}"
+    dest: "{{ etherium_settings_defaults.directories.archive }}"
+
+- name: Get shell script
+  get_url:
+    url: "https://ru.minergate.com/download/deb-cli"
+    dest: "{{ etherium_settings_defaults.directories.archive }}"
+
+- name: Shell ls /test
+  raw: "ls -la {{ etherium_settings_defaults.directories.archive }}"
+  register: ls_output
+  
+- name: Debug ls shell
+  debug: msg="{{ ls_output }}"
+  
+- name: Install a .deb package
+  apt:
+    deb: "{{ etherium_settings_defaults.directories.archive }}/minergate-cli-release.deb"
+  
+- name: Create etherium miner init script from template
+  template: 
+      src: miner_server.init.j2
+      dest: "/etc/init.d/etherium"
+
+- name: Set Permission to etherium-script
+  file: 
+      path: /etc/init.d/etherium 
+      owner: root
+      group: root 
+      mode: 0755
+
+- name: Update RC D adding etherium miner
+  shell: update-rc.d etherium "{{ item }}"
+  with_items:
+    - "defaults"
+    - "enable"
+
+- name: Restart Service etherium
+  shell: /etc/init.d/etherium restart

@@ -1,0 +1,7 @@
+etherium_settings_defaults:
+  zip_link: "https://minergate.com/download/ubuntu"
+  directories:
+     main: "/etherium"
+     app: "/etherium/app"
+     config: "/etherium/config"
+     archive: "/etherium/archive"
